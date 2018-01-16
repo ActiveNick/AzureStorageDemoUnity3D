@@ -255,11 +255,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AzureSamples\Storage\BaseStorage.cs" />
     <Compile Include="Assets\AzureSamples\Storage\BlobStorage.cs" />
     <Compile Include="Assets\AzureSamples\Storage\FileStorage.cs" />
     <Compile Include="Assets\AzureSamples\Storage\QueueStorage.cs" />
     <Compile Include="Assets\AzureSamples\Storage\TableStorage.cs" />
+    <Compile Include="Assets\Scripts\BaseStorage.cs" />
+    <Compile Include="Assets\Scripts\BlockBlobMediaTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

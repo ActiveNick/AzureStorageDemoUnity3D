@@ -88,6 +88,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -109,6 +110,8 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    debug:
+      m_Flags: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1 &199038506
 GameObject:
@@ -541,7 +544,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
 --- !u!4 &345904739
 Transform:
   m_ObjectHideFlags: 0
@@ -1052,7 +1054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87dd26c63fbfd6a49a2c32d4ca48a55c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConnectionString: 
+  ConnectionString: DefaultEndpointsProtocol=http;AccountName=unityplaygroundstorage;AccountKey=7+VIWHlvb35VWw1AfwXCLH2+cshVGVCkUjFjPGxWyM09NOGy8/jsMFELvjJKpgi0m6ISPcM15ILZnOOanttEWg==;EndpointSuffix=core.windows.net
   BlockBlobContainerName: democontainerblockblob
   PageBlobContainerName: democontainerpageblob
 --- !u!114 &657014828
@@ -1066,7 +1068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92884a950e70fa741bd709c6109a9436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConnectionString: 
+  ConnectionString: DefaultEndpointsProtocol=http;AccountName=unityplaygroundstorage;AccountKey=7+VIWHlvb35VWw1AfwXCLH2+cshVGVCkUjFjPGxWyM09NOGy8/jsMFELvjJKpgi0m6ISPcM15ILZnOOanttEWg==;EndpointSuffix=core.windows.net
   DemoShare: demofileshare
   DemoDirectory: demofiledirectory
   ImageToUpload: HelloWorld.png
@@ -1081,7 +1083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 485356d9224f90a42888c194deb1bd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConnectionString: 
+  ConnectionString: DefaultEndpointsProtocol=http;AccountName=unityplaygroundstorage;AccountKey=7+VIWHlvb35VWw1AfwXCLH2+cshVGVCkUjFjPGxWyM09NOGy8/jsMFELvjJKpgi0m6ISPcM15ILZnOOanttEWg==;EndpointSuffix=core.windows.net
 --- !u!114 &657014830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1093,7 +1095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a6d115aedf02154aa54589c6be38957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConnectionString: 
+  ConnectionString: DefaultEndpointsProtocol=http;AccountName=unityplaygroundstorage;AccountKey=7+VIWHlvb35VWw1AfwXCLH2+cshVGVCkUjFjPGxWyM09NOGy8/jsMFELvjJKpgi0m6ISPcM15ILZnOOanttEWg==;EndpointSuffix=core.windows.net
   TableName: people
   DemoShare: demofileshare
   DemoDirectory: demofiledirectory
