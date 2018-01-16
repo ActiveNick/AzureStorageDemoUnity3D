@@ -205,27 +205,6 @@
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>C:/Program Files/Unity 2017.2.1p2/Editor/Data/UnityExtensions/Unity/UnityHoloLens/Runtime/UnityEngine.HoloLens.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Azure.KeyVault.Core">
-      <HintPath>Assets/Plugins/Storage/Microsoft.Azure.KeyVault.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Data.Edm">
-      <HintPath>Assets/Plugins/Storage/Microsoft.Data.Edm.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Data.OData">
-      <HintPath>Assets/Plugins/Storage/Microsoft.Data.OData.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Data.Services.Client">
-      <HintPath>Assets/Plugins/Storage/Microsoft.Data.Services.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.WindowsAzure.Storage">
-      <HintPath>Assets/Plugins/Storage/Microsoft.WindowsAzure.Storage.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Assets/Plugins/Storage/Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Spatial">
-      <HintPath>Assets/Plugins/Storage/System.Spatial.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Data.Edm">
       <HintPath>Assets/Plugins/Storage/WSA/Microsoft.Data.Edm.dll</HintPath>
     </Reference>
