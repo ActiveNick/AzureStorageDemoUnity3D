@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F7C13288-DD5F-4110-A8B4-4D7A0CD7B384}</ProjectGuid>
+    <ProjectGuid>{50E91148-252B-4FC6-A30D-AEC9A1BD1257}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp.dll-player</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -213,6 +213,12 @@
     </Reference>
     <Reference Include="Microsoft.Data.OData">
       <HintPath>Assets/Plugins/Storage/WSA/Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Configuration">
+      <HintPath>Assets/Plugins/Storage/WSA/Microsoft.WindowsAzure.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage.DataMovement">
+      <HintPath>Assets/Plugins/Storage/WSA/Microsoft.WindowsAzure.Storage.DataMovement.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Storage">
       <HintPath>Assets/Plugins/Storage/WSA/Microsoft.WindowsAzure.Storage.dll</HintPath>
@@ -482,6 +488,7 @@
     <Compile Include="Assets\AzureSamples\Storage\QueueStorage.cs" />
     <Compile Include="Assets\AzureSamples\Storage\TableStorage.cs" />
     <Compile Include="Assets\Scripts\BaseStorage.cs" />
+    <Compile Include="Assets\Scripts\BlobTransferDM.cs" />
     <Compile Include="Assets\Scripts\BlockBlobMediaTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

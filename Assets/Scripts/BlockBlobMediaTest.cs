@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
+
 using UnityEngine;
 using Random = System.Random;
 
@@ -10,10 +11,13 @@ using Random = System.Random;
 using Windows.Storage;
 #endif
 
+// This code was designed to work in the Unity editor and in a UWP build.
+// There is currently no support for cross-platform to support other Unity targets (e.g. Android, iOS, etc.)
 public class BlockBlobMediaTest : BaseStorage
 {
-    public string BlockBlobContainerName = "mediacontainerblockblob";
-    public string TestMediaFile = "earth_8k.jpg";
+    // Set these in the inspector
+    public string BlockBlobContainerName = "mediacontainerblockblob";  // The blob container where we read from and write to
+    public string TestMediaFile = "earth_8k.jpg"; // The media file to upload or download
 
     public async void BlockBlobMediaUpload()
     {
@@ -29,6 +33,10 @@ public class BlockBlobMediaTest : BaseStorage
         await BasicStorageBlockBlobDownloadOperationsAsync();
     }
 
+    // This function uploads a file to a block blob in an Azure storage container using a single operation,
+    // which means it should be avoided for very large media files like videos since there is no way to 
+    // track progress on single operations. Look at the code in BlobTransferDM.cs to upload/download while
+    // tracking progress since it relies on the Azure Storage Data Movement Library.
     private async Task BasicStorageBlockBlobUploadOperationsAsync()
     {
         WriteLine("Testing BlockBlob Upload");
@@ -55,7 +63,7 @@ public class BlockBlobMediaTest : BaseStorage
         // using: https://[InsertYourStorageAccountNameHere].blob.core.windows.net/democontainer/HelloWorld.png
         // await container.SetPermissionsAsync(new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Blob });
 
-        // Upload a BlockBlob to the newly created container
+        // Get a BlockBlob reference for the file to upload to the newly created container
         WriteLine("2. Uploading BlockBlob");
         CloudBlockBlob blockBlob = container.GetBlockBlobReference(TestMediaFile);
 
@@ -70,6 +78,10 @@ public class BlockBlobMediaTest : BaseStorage
         WriteLine("-- Upload Test Complete --");
     }
 
+    // This function downloads a block blob from an Azure storage container into a file using a single operation,
+    // which means it should be avoided for very large media files like videos since there is no way to 
+    // track progress on single operations. Look at the code in BlobTransferDM.cs to upload/download while
+    // tracking progress since it relies on the Azure Storage Data Movement Library.
     private async Task BasicStorageBlockBlobDownloadOperationsAsync()
     {
         WriteLine("Testing BlockBlob Download");
@@ -90,10 +102,11 @@ public class BlockBlobMediaTest : BaseStorage
             throw;
         }
 
-
-        // List all the blobs in the container 
+        // Access a specific blob in the container 
         WriteLine("2. Get Specific Blob in Container");
 
+        // NOTE: The following code isn't needed for now because we assume the client app knows which asset to
+        // download by name, so there is no need to iterate through all the blobs.
         //CloudBlockBlob blockBlob = null;
         //BlobContinuationToken token = null;
         //BlobResultSegment list = await container.ListBlobsSegmentedAsync(token);
