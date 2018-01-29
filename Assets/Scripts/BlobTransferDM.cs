@@ -80,7 +80,12 @@ public class BlobTransferDM : BaseStorage
             StorageFolder storageFolder = ApplicationData.Current.TemporaryFolder;
             StorageFile sf = await storageFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
             path = sf.Path;
-            await blockBlob.DownloadToFileAsync(sf);
+            Stream sfs = await sf.OpenStreamForWriteAsync();
+            
+            // Download a local blob with progress updates
+            DownloadOptions dOptions = new DownloadOptions();
+            dOptions.DisableContentMD5Validation = true;  // TO DO: Need to test if MD5 works, currently disabled
+            await TransferManager.DownloadAsync(blockBlob, sfs, dOptions, context, CancellationToken.None);
 #else
             path = Path.Combine(Application.temporaryCachePath, fileName);
 

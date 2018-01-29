@@ -138,7 +138,7 @@ public class BlockBlobMediaTest : BaseStorage
             path = sf.Path;
             await blockBlob.DownloadToFileAsync(sf);
 #else
-        path = Path.Combine(Application.temporaryCachePath, fileName);
+            path = Path.Combine(Application.temporaryCachePath, fileName);
         await blockBlob.DownloadToFileAsync(path, FileMode.Create);
 #endif
             WriteLine(string.Format("4. Blob file downloaded to {0}", path));
