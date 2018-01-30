@@ -33,6 +33,9 @@ bld/
 # Always get Unity root tools
 ![U]nity/**
 
+# Always include Unity Assets
+[Aa]ssets/AssetStoreTools*
+
 # Always ignore Unity Library and Temp folders
 **/[Ll]ibrary/*
 **/[Tt]emp/
