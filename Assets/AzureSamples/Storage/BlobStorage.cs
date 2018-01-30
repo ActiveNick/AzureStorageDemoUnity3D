@@ -83,7 +83,7 @@ public class BlobStorage : BaseStorage
 		storageFolder = ApplicationData.Current.TemporaryFolder;
 		sf = await storageFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
 		path = sf.Path;
-		await blockBlob.DownloadToFileAsync(sf.Name, FileMode.Create);
+		await blockBlob.DownloadToFileAsync(sf);
 #else
         path = Path.Combine(Application.temporaryCachePath, fileName);
 		await blockBlob.DownloadToFileAsync(path, FileMode.Create);

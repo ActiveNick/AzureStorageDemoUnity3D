@@ -87,7 +87,7 @@ public class FileStorage : BaseStorage
 		storageFolder = ApplicationData.Current.TemporaryFolder;
 		sf = await storageFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
 		path = sf.Path;
-		await file.DownloadToFileAsync(sf.Name, FileMode.Create);
+		await file.DownloadToFileAsync(sf);
 #else
         path = Path.Combine(Application.temporaryCachePath, fileName);
 		await file.DownloadToFileAsync(path, FileMode.Create);

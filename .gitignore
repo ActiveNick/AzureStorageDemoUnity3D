@@ -34,8 +34,8 @@ bld/
 ![U]nity/**
 
 # Always include Unity Assets
-![Aa]ssets/AssetStoreTools**
-![Aa]ssets/Plugins/Storage**
+![Aa]ssets/AssetStoreTools/**
+![Aa]ssets/**
 
 # Always ignore Unity Library and Temp folders
 **/[Ll]ibrary/*
