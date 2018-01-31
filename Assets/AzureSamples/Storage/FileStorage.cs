@@ -54,7 +54,7 @@ public class FileStorage : BaseStorage
 #if WINDOWS_UWP
 		StorageFolder storageFolder = await StorageFolder.GetFolderFromPathAsync(Application.streamingAssetsPath.Replace('/', '\\'));
 		StorageFile sf = await storageFolder.GetFileAsync(ImageToUpload);
-		await file.UploadFromFileAsync(sf.Name);
+		await file.UploadFromFileAsync(sf);
 #else
 		await file.UploadFromFileAsync(Path.Combine(Application.streamingAssetsPath, ImageToUpload));
 #endif

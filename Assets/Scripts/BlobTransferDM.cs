@@ -7,7 +7,7 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage.DataMovement;
 
 using UnityEngine;
-using Random = System.Random;
+using System.Diagnostics;
 
 #if WINDOWS_UWP
 using Windows.Storage;
@@ -33,8 +33,10 @@ public class BlobTransferDM : BaseStorage
     // TO DO: Add support for uploads
 
     // Download using the Azure Storage Data Movement Library.
+    // The Azure Storage Data Movement library currently only works in the Unity Editor, not in UWP targets.
     private async Task StorageDataMovementBlockBlobDownloadAsync()
     {
+#if UNITY_EDITOR
         WriteLine("Downloading BlockBlob with ASDM Library");
 
         // Create a blob client for interacting with the blob service.
@@ -74,27 +76,35 @@ public class BlobTransferDM : BaseStorage
             WriteLine(string.Format("3. Download Blob from {0}", blockBlob.Uri.AbsoluteUri));
             string fileName = string.Format("CopyOf{0}", TestMediaFile);
 
-#if WINDOWS_UWP
-            // TO DO: UWP code is not complete and has not been tested yet. This is the old single operation code 
+            // All this UWP code should currently stay commented since DMLib doesn't work in Unity UWP at this time 
             // I have only tested Data Movement in the Unity editor
+            /* START OF UWP CODE
             StorageFolder storageFolder = ApplicationData.Current.TemporaryFolder;
             StorageFile sf = await storageFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
             path = sf.Path;
             Stream sfs = await sf.OpenStreamForWriteAsync();
-            
+
             // Download a local blob with progress updates
             DownloadOptions dOptions = new DownloadOptions();
             dOptions.DisableContentMD5Validation = true;  // TO DO: Need to test if MD5 works, currently disabled
             await TransferManager.DownloadAsync(blockBlob, sfs, dOptions, context, CancellationToken.None);
-#else
+            END OF UWP CODE */
+            var sw = Stopwatch.StartNew();
+
             path = Path.Combine(Application.temporaryCachePath, fileName);
 
             // Download a local blob with progress updates
             DownloadOptions dOptions = new DownloadOptions();
             dOptions.DisableContentMD5Validation = true;  // TO DO: Need to test if MD5 works, currently disabled
             await TransferManager.DownloadAsync(blockBlob, path, dOptions, context, CancellationToken.None);
+
+            sw.Stop();
+            TimeSpan time = sw.Elapsed;
+
+            WriteLine(string.Format("4. Blob file downloaded to {0} in {1}s", path, time.TotalSeconds.ToString()));
+#else
+            WriteLine("The Azure Storage Data Movement library currently only works in the Unity Editor, not in UWP targets.");
 #endif
-            WriteLine(string.Format("4. Blob file downloaded with ADSM to {0}", path));
         }
     }
 }

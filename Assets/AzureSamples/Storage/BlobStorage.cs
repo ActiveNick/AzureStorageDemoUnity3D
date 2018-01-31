@@ -58,7 +58,7 @@ public class BlobStorage : BaseStorage
 #if WINDOWS_UWP
 		StorageFolder storageFolder = await StorageFolder.GetFolderFromPathAsync(Application.streamingAssetsPath.Replace('/', '\\'));
 		StorageFile sf = await storageFolder.GetFileAsync(ImageToUpload);
-		await blockBlob.UploadFromFileAsync(sf.Name);
+		await blockBlob.UploadFromFileAsync(sf);
 #else
 		await blockBlob.UploadFromFileAsync(Path.Combine(Application.streamingAssetsPath, ImageToUpload));
 #endif

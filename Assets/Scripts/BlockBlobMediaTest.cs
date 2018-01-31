@@ -6,6 +6,7 @@ using Microsoft.WindowsAzure.Storage.Blob;
 
 using UnityEngine;
 using Random = System.Random;
+using System.Diagnostics;
 
 #if WINDOWS_UWP
 using Windows.Storage;
@@ -64,9 +65,10 @@ public class BlockBlobMediaTest : BaseStorage
         // await container.SetPermissionsAsync(new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Blob });
 
         // Get a BlockBlob reference for the file to upload to the newly created container
-        WriteLine("2. Uploading BlockBlob");
+        WriteLine("2. Uploading BlockBlob...");
         CloudBlockBlob blockBlob = container.GetBlockBlobReference(TestMediaFile);
 
+        var sw = Stopwatch.StartNew();
 #if WINDOWS_UWP
 		StorageFolder storageFolder = await StorageFolder.GetFolderFromPathAsync(Application.streamingAssetsPath.Replace('/', '\\'));
 		StorageFile sf = await storageFolder.GetFileAsync(TestMediaFile);
@@ -74,6 +76,10 @@ public class BlockBlobMediaTest : BaseStorage
 #else
         await blockBlob.UploadFromFileAsync(Path.Combine(Application.streamingAssetsPath, TestMediaFile));
 #endif
+        sw.Stop();
+        TimeSpan time = sw.Elapsed;
+
+        WriteLine(string.Format("3. File uploaded in {0}s", time.TotalSeconds.ToString()));
 
         WriteLine("-- Upload Test Complete --");
     }
@@ -129,9 +135,10 @@ public class BlockBlobMediaTest : BaseStorage
         {
             // Download a blob to your file system
             string path;
-            WriteLine(string.Format("3. Download Blob from {0}", blockBlob.Uri.AbsoluteUri));
+            WriteLine(string.Format("3. Download Blob from {0}...", blockBlob.Uri.AbsoluteUri));
             string fileName = string.Format("CopyOf{0}", TestMediaFile);
 
+            var sw = Stopwatch.StartNew();
 #if WINDOWS_UWP
             StorageFolder storageFolder = ApplicationData.Current.TemporaryFolder;
             StorageFile sf = await storageFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
@@ -139,9 +146,12 @@ public class BlockBlobMediaTest : BaseStorage
             await blockBlob.DownloadToFileAsync(sf);
 #else
             path = Path.Combine(Application.temporaryCachePath, fileName);
-        await blockBlob.DownloadToFileAsync(path, FileMode.Create);
+            await blockBlob.DownloadToFileAsync(path, FileMode.Create);
 #endif
-            WriteLine(string.Format("4. Blob file downloaded to {0}", path));
+            sw.Stop();
+            TimeSpan time = sw.Elapsed;
+
+            WriteLine(string.Format("4. Blob file downloaded to {0} in {1}s", path, time.TotalSeconds.ToString()));
 
             //WriteLine("File written to " + path);
 
