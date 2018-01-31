@@ -4,7 +4,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
+#if UNITY_EDITOR
 using Microsoft.WindowsAzure.Storage.DataMovement;
+#endif
 
 using UnityEngine;
 using System.Diagnostics;
@@ -102,9 +104,9 @@ public class BlobTransferDM : BaseStorage
             TimeSpan time = sw.Elapsed;
 
             WriteLine(string.Format("4. Blob file downloaded to {0} in {1}s", path, time.TotalSeconds.ToString()));
+        }
 #else
             WriteLine("The Azure Storage Data Movement library currently only works in the Unity Editor, not in UWP targets.");
 #endif
-        }
     }
 }

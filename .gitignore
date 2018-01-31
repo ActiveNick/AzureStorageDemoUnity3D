@@ -18,7 +18,8 @@
 [Rr]ef/
 x64/
 x86/
-build/
+[Bb]uild/*
+[Bb]uilds/*
 bld/
 [Bb]in/
 [Oo]bj/

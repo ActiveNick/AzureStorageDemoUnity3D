@@ -10,6 +10,7 @@ using System.Diagnostics;
 
 #if WINDOWS_UWP
 using Windows.Storage;
+using System.Runtime.InteropServices.WindowsRuntime;
 #endif
 
 // This code was designed to work in the Unity editor and in a UWP build.
@@ -32,6 +33,13 @@ public class BlockBlobMediaTest : BaseStorage
         ClearOutput();
         WriteLine("-- Downloading from Blob Storage --");
         await BasicStorageBlockBlobDownloadOperationsAsync();
+    }
+
+    public async void BlockBlobMediaDownloadBySegments()
+    {
+        ClearOutput();
+        WriteLine("-- Downloading from Blob Storage by Segments --");
+        await StorageBlockBlobDownloadWithProgressTrackingAsync();
     }
 
     // This function uploads a file to a block blob in an Azure storage container using a single operation,
@@ -168,4 +176,99 @@ public class BlockBlobMediaTest : BaseStorage
 
         WriteLine("-- Download Test Complete --");
     }
+
+    #region === REQUIRES ONLY AZURE STORAGE LIBRARY (WITH PROGRESS TRACKING) ===
+    /// <summary>
+    /// Download a blob using standard Azure Storage library (with progress tracking)
+    /// </summary>
+    /// <returns></returns>
+    private async Task StorageBlockBlobDownloadWithProgressTrackingAsync()
+    {
+        try
+        {
+            WriteLine("Testing BlockBlob Download with Progress Tracking");
+
+            // Create a blob client for interacting with the blob service.
+            CloudBlobClient blobClient = StorageAccount.CreateCloudBlobClient();
+
+            // Create a container for organizing blobs within the storage account.
+            WriteLine("1. Opening Blob Container");
+            CloudBlobContainer container = blobClient.GetContainerReference(BlockBlobContainerName);
+            try
+            {
+                await container.CreateIfNotExistsAsync();
+            }
+            catch (StorageException)
+            {
+                WriteLine("If you are running with the default configuration please make sure you have started the storage emulator. Press the Windows key and type Azure Storage to select and run it from the list of applications - then restart the sample.");
+                throw;
+            }
+
+            // Access a specific blob in the container 
+            WriteLine("2. Get Specific Blob in Container and its size");
+
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference(TestMediaFile);
+            int segmentSize = 1 * 1024 * 1024;//1 MB chunk
+
+            if (blockBlob != null)
+            {
+                // Obtain the size of the blob
+                await blockBlob.FetchAttributesAsync();
+                long blobSize = blockBlob.Properties.Length;
+                long blobLengthRemaining = blobSize;
+                long startPosition = 0;
+                WriteLine("3. Blob size (bytes):" + blobLengthRemaining.ToString());
+
+                // Download a blob to your file system
+                string path;
+                WriteLine(string.Format("4. Download Blob from {0}...", blockBlob.Uri.AbsoluteUri));
+                string fileName = string.Format("CopyOf{0}", TestMediaFile);
+
+                var sw = Stopwatch.StartNew();
+#if WINDOWS_UWP
+                    StorageFolder storageFolder = ApplicationData.Current.TemporaryFolder;
+                    StorageFile sf = await storageFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+                    path = sf.Path;
+                    var fs = await sf.OpenAsync(FileAccessMode.ReadWrite);
+
+                    do
+                    {
+                        long blockSize = Math.Min(segmentSize, blobLengthRemaining);
+                        byte[] blobContents = new byte[blockSize];
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            await blockBlob.DownloadRangeToStreamAsync(ms, (long)startPosition, blockSize);
+                            ms.Position = 0;
+                            ms.Read(blobContents, 0, blobContents.Length);
+                            fs.Seek((ulong)startPosition);
+                            await fs.WriteAsync(blobContents.AsBuffer());
+                        }
+                        WriteLine("Completed: " + ((float)startPosition / (float)blobSize).ToString("P"));
+                        startPosition += blockSize;
+                        blobLengthRemaining -= blockSize;
+                    }
+                    while (blobLengthRemaining > 0);
+                    WriteLine("Completed: 100.00%");
+                    fs = null;
+#else
+                path = Path.Combine(Application.temporaryCachePath, fileName);
+                // This technique has not been implemented for us in the editor yet
+                //await blockBlob.DownloadToFileAsync(path, FileMode.Create);
+#endif
+                sw.Stop();
+                TimeSpan time = sw.Elapsed;
+
+                WriteLine(string.Format("5. Blob file downloaded to {0} in {1}s", path, time.TotalSeconds.ToString()));
+            }
+
+            WriteLine("-- Download Test Complete --");
+        }
+        catch (Exception ex)
+        {
+            // Woops!
+            WriteLine("Error: " + ex.ToString());
+            WriteLine("Error: " + ex.InnerException.ToString());
+        }
+    }
+    #endregion
 }
