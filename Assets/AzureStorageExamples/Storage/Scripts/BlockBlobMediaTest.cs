@@ -7,7 +7,7 @@ public class BlockBlobMediaTest : MonoBehaviour
     {
         AzureBlobStorageClient.instance.ClearOutput();
         AzureBlobStorageClient.instance.WriteLine("-- Uploading to Blob Storage --");
-        await AzureBlobStorageClient.instance.BasicStorageBlockBlobUploadOperationsAsync("earth_8k.jpg");
+        await AzureBlobStorageClient.instance.UploadStorageBlockBlobBasicOperationAsync("earth_8k.jpg");
         AzureBlobStorageClient.instance.WriteLine("-- Upload Test Complete --");
     }
 
@@ -15,7 +15,7 @@ public class BlockBlobMediaTest : MonoBehaviour
     {
         AzureBlobStorageClient.instance.ClearOutput();
         AzureBlobStorageClient.instance.WriteLine("-- Downloading from Blob Storage --");
-        await AzureBlobStorageClient.instance.BasicStorageBlockBlobDownloadOperationsAsync("earth_8k.jpg");
+        await AzureBlobStorageClient.instance.DownloadStorageBlockBlobBasicOperationAsync("earth_8k.jpg");
         AzureBlobStorageClient.instance.WriteLine("-- Download Test Complete --");
     }
 
@@ -23,7 +23,7 @@ public class BlockBlobMediaTest : MonoBehaviour
     {
         AzureBlobStorageClient.instance.ClearOutput();
         AzureBlobStorageClient.instance.WriteLine("-- Downloading from Blob Storage by Segments --");
-        await AzureBlobStorageClient.instance.StorageBlockBlobDownloadWithProgressTrackingAsync("earth_8k.jpg");
+        await AzureBlobStorageClient.instance.DownloadStorageBlockBlobSegmentedOperationAsync("earth_8k.jpg");
     }
 
 }

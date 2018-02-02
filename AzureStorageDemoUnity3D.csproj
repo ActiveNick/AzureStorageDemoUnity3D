@@ -266,6 +266,7 @@
     <Compile Include="Assets\Scripts\AzureBlobStorageClient.cs" />
     <Compile Include="Assets\Scripts\BaseStorage.cs" />
     <Compile Include="Assets\Scripts\BlobStorage.cs" />
+    <Compile Include="Assets\Scripts\BlobStorageTextureDownloader.cs" />
     <Compile Include="Assets\Scripts\FileStorage.cs" />
     <Compile Include="Assets\Scripts\QueueStorage.cs" />
     <Compile Include="Assets\Scripts\TableStorage.cs" />

@@ -1571,6 +1571,7 @@ GameObject:
   - component: {fileID: 1831384497}
   - component: {fileID: 1831384496}
   - component: {fileID: 1831384495}
+  - component: {fileID: 1831384499}
   m_Layer: 0
   m_Name: Earth
   m_TagString: Untagged
@@ -1644,6 +1645,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1831384499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1831384494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86612eb354af8224e91aaa390579da1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TextureFile: earth_8k.jpg
 --- !u!1 &1923382102
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,9 +26,13 @@ public class AzureBlobStorageClient : MonoBehaviour
     // Set these in the inspector
     // Note that due to a Unity limitation, you cannot use https, so make sure your endpoint connection string
     // only uses http. THIS MEANS YOUR CONNECTION WILL NOT BE ENCRYPTED. We are working on that.
+    [Tooltip("Connection string to Azure Storage account (cannot use https in Editor).")]
     public string ConnectionString = string.Empty;
+    [Tooltip("Azure Storage Blob container to use for uploads & downloads.")]
     public string BlockBlobContainerName = "mediacontainerblockblob";  // The blob container where we read from and write to
-    [Tooltip("Determines blob downloads will overwrite existing files by default (Can be overriden on each call in code)")]
+    [Tooltip("Segment size to use for segmented blob upload & download operations (in KB).")]
+    public int SegmentSizeKB = 1024;
+    [Tooltip("Determines blob downloads will overwrite existing files by default (Can be overriden on each call in code).")]
     public bool OverwriteFilesByDefault = false;
 
     private CloudStorageAccount StorageAccount;
@@ -41,14 +45,16 @@ public class AzureBlobStorageClient : MonoBehaviour
     {
         // Allows this class instance to behave like a singleton
         instance = this;
-    }
 
-    void Start()
-    {
         _myText = GameObject.Find("DebugText").GetComponent<Text>();
         IsDebugTextEnabled = (_myText != null);
 
         StorageAccount = CloudStorageAccount.Parse(ConnectionString);
+    }
+
+    void Start()
+    {
+
     }
 
     // Clears the Canvas output text
@@ -77,7 +83,7 @@ public class AzureBlobStorageClient : MonoBehaviour
     // which means it should be avoided for very large media files like videos since there is no way to 
     // track progress on single operations. Look at the code in BlobTransferDM.cs to upload/download while
     // tracking progress since it relies on the Azure Storage Data Movement Library.
-    public async Task BasicStorageBlockBlobUploadOperationsAsync(string MediaFile)
+    public async Task UploadStorageBlockBlobBasicOperationAsync(string MediaFile)
     {
         try
         {
@@ -131,22 +137,22 @@ public class AzureBlobStorageClient : MonoBehaviour
     }
 
     /// <summary>
-    /// BasicStorageBlockBlobDownloadOperationsAsync
+    /// DownloadStorageBlockBlobBasicOperationAsync
     /// This function downloads a block blob from an Azure storage container into a file using a single operation,
     /// which means it should be avoided for very large media files like videos since there is no way to 
     /// track progress on single operations. 
-    /// Use StorageBlockBlobDownloadWithProgressTrackingAsync instead to download using blob segments, which
+    /// Use DownloadStorageBlockBlobSegmentedOperationAsync instead to download using blob segments, which
     /// allows the download progress to be tracked and reported to the user in a UI.
     /// </summary>
 
     // Overload: If no file overwrite parameter was passed, use the default setting at the class level
-    public async Task BasicStorageBlockBlobDownloadOperationsAsync(string MediaFile)
+    public async Task<string> DownloadStorageBlockBlobBasicOperationAsync(string MediaFile)
     {
-        await BasicStorageBlockBlobDownloadOperationsAsync(MediaFile, OverwriteFilesByDefault);
+        return await DownloadStorageBlockBlobBasicOperationAsync(MediaFile, OverwriteFilesByDefault);
     }
 
     // Overload: Override the default file overwrite setting at the class level for this specific file
-    public async Task BasicStorageBlockBlobDownloadOperationsAsync(string MediaFile, bool overwrite)
+    public async Task<string> DownloadStorageBlockBlobBasicOperationAsync(string MediaFile, bool overwrite)
     {
         try
         {
@@ -214,7 +220,7 @@ public class AzureBlobStorageClient : MonoBehaviour
                     else
                     {
                         WriteLine(string.Format("File {0} already exists and overwriting is disabled. Download operation cancelled.", fileName));
-                        return;
+                        return path;
                     }
                 }
                 // Start the timer to measure performance
@@ -228,10 +234,13 @@ public class AzureBlobStorageClient : MonoBehaviour
                 sw.Stop();
                 TimeSpan time = sw.Elapsed;
                 WriteLine(string.Format("Blob file downloaded to {0} in {1}s.", path, time.TotalSeconds.ToString()));
+
+                return path;
             }
             else
             {
                 WriteLine(string.Format("File {0} not found in blob {1}.", MediaFile, blockBlob.Uri.AbsoluteUri));
+                return string.Empty;
             }
         }
         catch (Exception ex)
@@ -240,26 +249,27 @@ public class AzureBlobStorageClient : MonoBehaviour
             WriteLine(string.Format("Error while downloading file {0}.", MediaFile));
             WriteLine("Error: " + ex.ToString());
             WriteLine("Error: " + ex.InnerException.ToString());
+            return string.Empty;
         }
     }
     #endregion
 
     #region === STORAGE OPERATIONS BY SEGMENTS WITH TRACKING (REQUIRES ONLY AZURE STORAGE LIBRARY) ===
     /// <summary>
-    /// StorageBlockBlobDownloadWithProgressTrackingAsync:
+    /// DownloadStorageBlockBlobSegmentedOperationAsync:
     /// Download a blob using standard Azure Storage library using blob segments.
     /// This allows the download progress to be tracked and reported to the user in a UI.
     /// </summary>
     /// <returns></returns>
 
     // Overload: If no file overwrite parameter was passed, use the default setting at the class level
-    public async Task StorageBlockBlobDownloadWithProgressTrackingAsync(string MediaFile)
+    public async Task<string> DownloadStorageBlockBlobSegmentedOperationAsync(string MediaFile)
     {
-        await StorageBlockBlobDownloadWithProgressTrackingAsync(MediaFile, OverwriteFilesByDefault);
+        return await DownloadStorageBlockBlobSegmentedOperationAsync(MediaFile, OverwriteFilesByDefault);
     }
 
     // Overload: Override the default file overwrite setting at the class level for this specific file
-    public async Task StorageBlockBlobDownloadWithProgressTrackingAsync(string MediaFile, bool overwrite)
+    public async Task<string> DownloadStorageBlockBlobSegmentedOperationAsync(string MediaFile, bool overwrite)
     {
         try
         {
@@ -283,7 +293,7 @@ public class AzureBlobStorageClient : MonoBehaviour
             WriteLine("Get Specific Blob in Container and its size");
 
             CloudBlockBlob blockBlob = container.GetBlockBlobReference(MediaFile);
-            int segmentSize = 1 * 1024 * 1024;  //1 MB chunk
+            int segmentSize = SegmentSizeKB * 1024;  // SegmentSizeKB is set in the inspector chunk
 
             if (blockBlob != null)
             {
@@ -308,7 +318,6 @@ public class AzureBlobStorageClient : MonoBehaviour
                     CreationCollisionOption collisionoption = (overwrite ? CreationCollisionOption.ReplaceExisting : CreationCollisionOption.FailIfExists);
                     sf = await storageFolder.CreateFileAsync(fileName, collisionoption);
                     fileExists = false; // if the file existed but we were allowed to overwrite it, let's treat it as if it didn't exist
-                    path = sf.Path;
                 }
                 catch (Exception)
                 {
@@ -316,6 +325,7 @@ public class AzureBlobStorageClient : MonoBehaviour
                     fileExists = true;
                     sf = await storageFolder.GetFileAsync(fileName); // Necessary to avoid a compilation error below
                 }
+                path = sf.Path;
 #else
                 path = Path.Combine(Application.temporaryCachePath, fileName);
                 fileExists = File.Exists(path);
@@ -334,7 +344,7 @@ public class AzureBlobStorageClient : MonoBehaviour
                     else
                     {
                         WriteLine(string.Format("File {0} already exists and overwriting is disabled. Download operation cancelled.", fileName));
-                        return;
+                        return path;
                     }
                 }
 #if WINDOWS_UWP
@@ -368,7 +378,8 @@ public class AzureBlobStorageClient : MonoBehaviour
                 while (blobLengthRemaining > 0);
                 WriteLine("Completed: 100.00%");
 #if !WINDOWS_UWP
-                fs.Close();  // Required
+                // Required for Mono & .NET or we'll get a file IO access violation the next time we try to access it
+                fs.Close();  
 #endif
                 fs = null;
 
@@ -376,13 +387,13 @@ public class AzureBlobStorageClient : MonoBehaviour
                 sw.Stop();
                 TimeSpan time = sw.Elapsed;
                 WriteLine(string.Format("5. Blob file downloaded to {0} in {1}s", path, time.TotalSeconds.ToString()));
+                return path;
             }
             else
             {
                 WriteLine(string.Format("3. File {0} not found in blob {1}", MediaFile, blockBlob.Uri.AbsoluteUri));
+                return string.Empty;
             }
-
-            WriteLine("-- Download Test Complete --");
         }
         catch (Exception ex)
         {
@@ -390,6 +401,7 @@ public class AzureBlobStorageClient : MonoBehaviour
             WriteLine(string.Format("Error while downloading file {0}", MediaFile));
             WriteLine("Error: " + ex.ToString());
             WriteLine("Error: " + ex.InnerException.ToString());
+            return string.Empty;
         }
     }
 #endregion
