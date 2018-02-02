@@ -206,9 +206,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7df5f23cb0620b44c8eca0858e3391ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConnectionString: DefaultEndpointsProtocol=http;AccountName=unityplaygroundstorage;AccountKey=7+VIWHlvb35VWw1AfwXCLH2+cshVGVCkUjFjPGxWyM09NOGy8/jsMFELvjJKpgi0m6ISPcM15ILZnOOanttEWg==;EndpointSuffix=core.windows.net
-  BlockBlobContainerName: mediacontainerblockblob
-  TestMediaFile: earth_8k.jpg
 --- !u!4 &197877700
 Transform:
   m_ObjectHideFlags: 0
@@ -715,6 +712,48 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
+--- !u!1 &795174518
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 795174520}
+  - component: {fileID: 795174519}
+  m_Layer: 0
+  m_Name: AzureBlobStorageManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &795174519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 795174518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 719d7d0807add3642bcb80b1b42a6d81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ConnectionString: DefaultEndpointsProtocol=http;AccountName=unityplaygroundstorage;AccountKey=7+VIWHlvb35VWw1AfwXCLH2+cshVGVCkUjFjPGxWyM09NOGy8/jsMFELvjJKpgi0m6ISPcM15ILZnOOanttEWg==;EndpointSuffix=core.windows.net
+  BlockBlobContainerName: mediacontainerblockblob
+--- !u!4 &795174520
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 795174518}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &818724784
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,7 +904,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2049390102}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.9802372
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1972,7 +2011,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 240862052}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.9785407
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
