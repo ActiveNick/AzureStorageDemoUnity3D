@@ -11,7 +11,7 @@ public class BlobStorageTextureDownloader : MonoBehaviour {
     // Use this for initialization
     async void Start () {
 
-        string localimagefile = await AzureBlobStorageClient.instance.DownloadStorageBlockBlobSegmentedOperationAsync("earth_8k.jpg");
+        string localimagefile = await AzureBlobStorageClient.instance.DownloadStorageBlockBlobSegmentedOperationAsync(TextureFile);
 
         if (localimagefile.Length > 0)
         {
