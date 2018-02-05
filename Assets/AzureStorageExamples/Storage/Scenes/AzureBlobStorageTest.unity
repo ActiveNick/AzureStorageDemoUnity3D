@@ -790,6 +790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TextureFile: mars_8k.jpg
+  TextureSize: 0
 --- !u!23 &753969106
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1754,6 +1755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TextureFile: earth_8k.jpg
+  TextureSize: 512
 --- !u!1 &1923382102
 GameObject:
   m_ObjectHideFlags: 0
