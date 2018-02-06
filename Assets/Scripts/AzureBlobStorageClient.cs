@@ -24,12 +24,17 @@ public class AzureBlobStorageClient : MonoBehaviour
     public static AzureBlobStorageClient instance;
 
     // Set these in the inspector
-    // Note that due to a Unity limitation, you cannot use https, so make sure your endpoint connection string
-    // only uses http. THIS MEANS YOUR CONNECTION WILL NOT BE ENCRYPTED. We are working on that.
+    // Note that due to a Unity limitation, you cannot use https in the Unity editor in Play mode, 
+    // so either make sure your endpoint connection string only uses http or check DisableSSLInEditor.
+    // THIS MEANS YOUR CONNECTION WILL NOT BE ENCRYPTED when running your app from the Unity Editor.
+    // You can use an endpoint with https and check DisableSSLInEditor to fix this. This way your
+    // connection will still be secure in your UWP builds.
     [Tooltip("Connection string to Azure Storage account (cannot use https in Editor).")]
     public string ConnectionString = string.Empty;
+    [Tooltip("Check this if you use an HTTPS endpoint to allow your app to still run in the Unity Editor.")]
+    public bool DisableSSLInEditor = true;
     [Tooltip("Azure Storage Blob container to use for uploads & downloads.")]
-    public string BlockBlobContainerName = "mediacontainerblockblob";  // The blob container where we read from and write to
+    public string BlobContainerName = "mediacontainerblockblob";  // The blob container where we read from and write to
     [Tooltip("Segment size to use for segmented blob upload & download operations (in KB).")]
     public int SegmentSizeKB = 1024;
     [Tooltip("Determines blob downloads will overwrite existing files by default (Can be overriden on each call in code).")]
@@ -49,7 +54,16 @@ public class AzureBlobStorageClient : MonoBehaviour
         _myText = GameObject.Find("DebugText").GetComponent<Text>();
         IsDebugTextEnabled = (_myText != null);
 
-        StorageAccount = CloudStorageAccount.Parse(ConnectionString);
+        string connString;
+        // Check to see if this is necessary for standalone desktop builds
+#if !WINDOWS_UWP
+        connString = ConnectionString.Replace("https", "http").Replace("HTTPS", "http").Replace("Https", "http");
+#else
+        connString = ConnectionString;
+#endif
+        // Initialize the Cloud Storage Account based on the connection string
+        // TO DO: Switch to SAS tokens to eliminate the need to embed connection strings in the app
+        StorageAccount = CloudStorageAccount.Parse(connString);
     }
 
     void Start()
@@ -92,7 +106,7 @@ public class AzureBlobStorageClient : MonoBehaviour
 
             // Create a container for organizing blobs within the storage account.
             WriteLine("Creating Blob Container in Azure Storage.");
-            CloudBlobContainer container = blobClient.GetContainerReference(BlockBlobContainerName);
+            CloudBlobContainer container = blobClient.GetContainerReference(BlobContainerName);
             try
             {
                 await container.CreateIfNotExistsAsync();
@@ -161,7 +175,7 @@ public class AzureBlobStorageClient : MonoBehaviour
 
             // Create a container for organizing blobs within the storage account.
             WriteLine("Opening Blob Container in Azure Storage.");
-            CloudBlobContainer container = blobClient.GetContainerReference(BlockBlobContainerName);
+            CloudBlobContainer container = blobClient.GetContainerReference(BlobContainerName);
             try
             {
                 await container.CreateIfNotExistsAsync();
@@ -278,7 +292,7 @@ public class AzureBlobStorageClient : MonoBehaviour
 
             // Create a container for organizing blobs within the storage account.
             WriteLine("Opening Blob Container in Azure Storage.");
-            CloudBlobContainer container = blobClient.GetContainerReference(BlockBlobContainerName);
+            CloudBlobContainer container = blobClient.GetContainerReference(BlobContainerName);
             try
             {
                 await container.CreateIfNotExistsAsync();
@@ -380,6 +394,8 @@ public class AzureBlobStorageClient : MonoBehaviour
 #if !WINDOWS_UWP
                 // Required for Mono & .NET or we'll get a file IO access violation the next time we try to access it
                 fs.Close();  
+#else
+                fs.Dispose();
 #endif
                 fs = null;
 
