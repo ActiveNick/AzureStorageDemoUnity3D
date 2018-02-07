@@ -51,5 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719d7d0807add3642bcb80b1b42a6d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConnectionString: DefaultEndpointsProtocol=http;AccountName=unityplaygroundstorage;AccountKey=7+VIWHlvb35VWw1AfwXCLH2+cshVGVCkUjFjPGxWyM09NOGy8/jsMFELvjJKpgi0m6ISPcM15ILZnOOanttEWg==;EndpointSuffix=core.windows.net
-  BlockBlobContainerName: mediacontainerblockblob
+  ConnectionString: DefaultEndpointsProtocol=https;AccountName=unityplaygroundstorage;AccountKey=7+VIWHlvb35VWw1AfwXCLH2+cshVGVCkUjFjPGxWyM09NOGy8/jsMFELvjJKpgi0m6ISPcM15ILZnOOanttEWg==;EndpointSuffix=core.windows.net
+  DisableSSLInEditor: 1
+  BlobContainerName: mediacontainerblockblob
+  SegmentSizeKB: 1024
+  OverwriteFilesByDefault: 0

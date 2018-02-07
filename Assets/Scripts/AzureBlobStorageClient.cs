@@ -40,6 +40,8 @@ public class AzureBlobStorageClient : MonoBehaviour
     [Tooltip("Determines blob downloads will overwrite existing files by default (Can be overriden on each call in code).")]
     public bool OverwriteFilesByDefault = false;
 
+    public Progress ProgressBar;
+
     private CloudStorageAccount StorageAccount;
 
     // HOW TO LOG RESULTS: Make sure there is a UI Text gameObject named "DebugText" in your scene
@@ -315,6 +317,7 @@ public class AzureBlobStorageClient : MonoBehaviour
                 await blockBlob.FetchAttributesAsync();
                 long blobSize = blockBlob.Properties.Length;
                 long blobLengthRemaining = blobSize;
+                float completion = 0f;
                 long startPosition = 0;
                 WriteLine("3. Blob size (bytes):" + blobLengthRemaining.ToString());
 
@@ -385,12 +388,15 @@ public class AzureBlobStorageClient : MonoBehaviour
                         fs.Write(blobContents, 0, blobContents.Length);
 #endif
                     }
-                    WriteLine("Completed: " + ((float)startPosition / (float)blobSize).ToString("P"));
+                    completion = (float)startPosition / (float)blobSize;
+                    WriteLine("Completed: " + (completion).ToString("P"));
+                    ProgressBar.Value = (completion * 100);
                     startPosition += blockSize;
                     blobLengthRemaining -= blockSize;
                 }
                 while (blobLengthRemaining > 0);
                 WriteLine("Completed: 100.00%");
+                ProgressBar.Value = 100;
 #if !WINDOWS_UWP
                 // Required for Mono & .NET or we'll get a file IO access violation the next time we try to access it
                 fs.Close();  

@@ -263,6 +263,7 @@
   <ItemGroup>
     <Compile Include="Assets\AzureStorageExamples\Storage\Scripts\BlobTransferDM.cs" />
     <Compile Include="Assets\AzureStorageExamples\Storage\Scripts\BlockBlobMediaTest.cs" />
+    <Compile Include="Assets\ProgressBar\Scripts\Progress.cs" />
     <Compile Include="Assets\Scripts\AzureBlobStorageClient.cs" />
     <Compile Include="Assets\Scripts\BaseStorage.cs" />
     <Compile Include="Assets\Scripts\BlobStorage.cs" />
