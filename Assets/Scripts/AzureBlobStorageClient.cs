@@ -364,6 +364,8 @@ public class AzureBlobStorageClient : MonoBehaviour
                         return path;
                     }
                 }
+
+                ProgressBar.AddDownload();
 #if WINDOWS_UWP
                 var fs = await sf.OpenAsync(FileAccessMode.ReadWrite);
 #else
@@ -397,6 +399,7 @@ public class AzureBlobStorageClient : MonoBehaviour
                 while (blobLengthRemaining > 0);
                 WriteLine("Completed: 100.00%");
                 ProgressBar.Value = 100;
+                ProgressBar.RemoveDownload();
 #if !WINDOWS_UWP
                 // Required for Mono & .NET or we'll get a file IO access violation the next time we try to access it
                 fs.Close();  
