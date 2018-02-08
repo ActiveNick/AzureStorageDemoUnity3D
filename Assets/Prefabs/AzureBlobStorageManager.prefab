@@ -55,4 +55,5 @@ MonoBehaviour:
   DisableSSLInEditor: 1
   BlobContainerName: mediacontainerblockblob
   SegmentSizeKB: 1024
-  OverwriteFilesByDefault: 0
+  OverwriteFilesByDefault: 1
+  ProgressBar: {fileID: 0}
