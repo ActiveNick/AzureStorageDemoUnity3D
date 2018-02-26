@@ -249,7 +249,11 @@ PlayerSettings:
   m_BuildTargetIcons: []
   m_BuildTargetBatching: []
   m_BuildTargetGraphicsAPIs: []
-  m_BuildTargetVRSettings: []
+  m_BuildTargetVRSettings:
+  - m_BuildTarget: Metro
+    m_Enabled: 0
+    m_Devices:
+    - WindowsMR
   m_BuildTargetEnableVuforiaSettings: []
   openGLRequireES31: 0
   openGLRequireES31AEP: 0
@@ -580,7 +584,7 @@ PlayerSettings:
       InternetClient: True
       InternetClientServer: False
       Location: False
-      Microphone: False
+      Microphone: True
       MusicLibrary: False
       Objects3D: False
       PhoneCall: False
