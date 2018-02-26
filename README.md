@@ -1,8 +1,12 @@
 # AzureStorageDemoUnity3D
 Sample Unity project used to demonstrate the use of Azure Storage services in games and Mixed Reality projects. This app shows how you can upload/download blobs from Azure Storage using the basic Azure Storage SDK (I’m using the Win8 DLL for UWP), and you'll also have the ability to download blobs by segments of 1MB (configurable) which opens the door for tracking progress during the download.
 
-* **Unity version: 2017.2.1p3** [download here](https://beta.unity3d.com/download/273860332f50/UnityDownloadAssistant-2017.2.1p3.exe?_ga=2.193594410.660943326.1517859510-26152681.1510325491)
+* **Unity version: 2017.2.1p4** [download here](https://beta.unity3d.com/download/1992a1ed2d78/UnityDownloadAssistant-2017.2.1p4.exe?_ga=2.144542141.908717835.1519654169-26152681.1510325491)
 * **Mixed Reality Toolkit version: 2017.2.1.1** [download here](https://github.com/Microsoft/MixedRealityToolkit-Unity/releases/tag/2017.2.1.1)
+
+# Demo Scenes
+* AzureBlobStorageTest: Simple scene to demonstrate how to upload & download files to/from Azure Blob Storage, showcasing the Azure Transfer ProgressBar and the debug window. The spheres demonstrate the use of the BlobStorageTextureDownloader script.
+* AzureBlobStorageVideoTest: Simple movie theater scene used to play video files downloaded from Azure Blob Storage. This scene reuses components and scripts from the [Unity Graphics Live Training: Playing Video in Unity](https://unity3d.com/learn/tutorials/topics/graphics/introduction-and-session-goals?playlist=17102).
 
 ## Implementation Notes
 * The plugin DLL files are included in the source since they are specific versions selected for this project based on compatibility. The [Azure Storage DLL](https://www.nuget.org/packages/WindowsAzure.Storage/) is the Win8 version for the UWP build, and the .NET 4.5 version for the Unity editor.
