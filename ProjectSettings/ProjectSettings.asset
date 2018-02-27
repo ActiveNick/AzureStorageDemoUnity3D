@@ -557,7 +557,7 @@ PlayerSettings:
   metroCertificateSubject: DefaultCompany
   metroCertificateIssuer: DefaultCompany
   metroCertificateNotAfter: 008b1b6835b8d401
-  metroApplicationDescription: AzureStorageDemoUnity3D
+  metroApplicationDescription: Azure Storage Demo Unity3D
   wsaImages: {}
   metroTileShortName: AzureStorageDemoUnity3D
   metroCommandLineArgsFile: 
