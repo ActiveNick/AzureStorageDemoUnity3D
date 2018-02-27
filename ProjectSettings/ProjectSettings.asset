@@ -12,7 +12,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Microsoft
-  productName: AzureStorageDemoUnity3D
+  productName: Azure Storage Demo Unity3D
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -557,7 +557,8 @@ PlayerSettings:
   metroCertificateSubject: DefaultCompany
   metroCertificateIssuer: DefaultCompany
   metroCertificateNotAfter: 008b1b6835b8d401
-  metroApplicationDescription: Azure Storage Demo Unity3D
+  metroApplicationDescription: Sample Unity project used to demonstrate the use of
+    Azure Storage services in games and Mixed Reality projects.
   wsaImages: {}
   metroTileShortName: AzureStorageDemoUnity3D
   metroCommandLineArgsFile: 
