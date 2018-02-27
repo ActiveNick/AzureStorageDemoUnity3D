@@ -231,7 +231,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 584235709}
-  - component: {fileID: 584235710}
   m_Layer: 0
   m_Name: SceneStorage
   m_TagString: Untagged
@@ -252,19 +251,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &584235710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 584235708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7e6abaee1e9e8b42ae4d983386c2d6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VideoFilename: SurfaceStudio.mp4
-  player: {fileID: 1100210683}
 --- !u!1001 &631081225
 Prefab:
   m_ObjectHideFlags: 0
@@ -691,6 +677,50 @@ Prefab:
     - target: {fileID: 224003446980345566, guid: 3ff3fb094318a37468739ea3da35463e,
         type: 2}
       propertyPath: m_AnchoredPosition.x
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 224495090256937604, guid: 3ff3fb094318a37468739ea3da35463e,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224495090256937604, guid: 3ff3fb094318a37468739ea3da35463e,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224495090256937604, guid: 3ff3fb094318a37468739ea3da35463e,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -200
+      objectReference: {fileID: 0}
+    - target: {fileID: 224307844554720568, guid: 3ff3fb094318a37468739ea3da35463e,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224307844554720568, guid: 3ff3fb094318a37468739ea3da35463e,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224307844554720568, guid: 3ff3fb094318a37468739ea3da35463e,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 224307844554720568, guid: 3ff3fb094318a37468739ea3da35463e,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 224307844554720568, guid: 3ff3fb094318a37468739ea3da35463e,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4403891917083882, guid: 3ff3fb094318a37468739ea3da35463e, type: 2}
+      propertyPath: m_LocalPosition.x
       value: -0.05
       objectReference: {fileID: 0}
     m_RemovedComponents:
