@@ -17,9 +17,13 @@ Sample Unity project used to demonstrate the use of Azure Storage services in ga
 * Use the *AzureBlobStorageManager* prefab in your scene since it contains the main *AzureBlobStorageClient* script & proxy class you need to quickly integrate Azure Blob Storage in your projects.
 * When running in the editor you CANNOT use https to connect to Blob Storage due to a certificates limitation in Unity, but https works fine in the UWP build. The *AzureBlobStorageClient* script includes a checkbox to enable this http/https toggle automatically for you.
 * The plugin DLL files are included in the source since they are specific versions selected for this project based on compatibility. The [Azure Storage DLL](https://www.nuget.org/packages/WindowsAzure.Storage/) is the Win8 version for the UWP build, and the .NET 4.5 version for the Unity editor.
-* The Movie Theater scene used some components and scripts from the [Unity Graphics Live Training: Playing Video in Unity](https://unity3d.com/learn/tutorials/topics/graphics/introduction-and-session-goals?playlist=17102) as a starting point.
 * There is an extra button that showcases a blob download example script using the [Azure Storage Data Movement library](https://www.nuget.org/packages/Microsoft.Azure.Storage.DataMovement) and while it currently runs fine in the Unity editor, note that the UWP build export doesn't work. This is because Unity cannot handle a 16299 UWP DLL, so I decided to shelve DMLib for now until Unity 2018.1 adds support for .NET Standard 2.0.
 * If you want to dig into the techniques used for Azure Storage in this Unity demo, check out my [UWP XAML Test Client for Azure Storage here](https://github.com/ActiveNick/AzStorageDataMovementTest).
+
+## Acknowledgements
+
+* The Movie Theater scene used some components and scripts from the [Unity Graphics Live Training: Playing Video in Unity](https://unity3d.com/learn/tutorials/topics/graphics/introduction-and-session-goals?playlist=17102) as a starting point.
+* The planetary texture maps were downloaded from [Solar System Scope](https://www.solarsystemscope.com/textures), and are based on NASA elevation and imagery data. Solar System Scope license statement: *"Distributed these textures under Attribution 4.0 International license: You may use, adapt, and share these textures for any purpose, even commercially"*.
 
 ## Reference Links
 * [Azure SDKs for Game Developers](https://docs.microsoft.com/sandbox/gamedev/)
