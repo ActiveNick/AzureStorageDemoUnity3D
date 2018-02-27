@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.UI;
+using System.IO;
 
 public class WorldSpaceVideo : MonoBehaviour {
 
@@ -17,12 +18,15 @@ public class WorldSpaceVideo : MonoBehaviour {
     public PlayHeadMover playheadMover;
 
     private VideoPlayer videoPlayer;
+    private AudioSource audioSource;
     private int videoClipIndex;
 
     private void Awake()
     {
         {
             videoPlayer = GetComponent<VideoPlayer>();
+            audioSource = gameObject.AddComponent<AudioSource>();
+
         }
     }
     // Use this for initialization
@@ -42,6 +46,32 @@ public class WorldSpaceVideo : MonoBehaviour {
             playheadMover.MovePlayHead(CalculatePlayedFraction());
         }
 	}
+
+    public void PlayVideoFromFile(string videofile)
+    {
+        if (File.Exists(videofile))
+        {
+            videoPlayer.source = VideoSource.Url;
+            videoPlayer.url = videofile;
+            videoPlayer.audioOutputMode = VideoAudioOutputMode.AudioSource;
+            videoPlayer.EnableAudioTrack(0, true);
+            videoPlayer.SetTargetAudioSource(0, audioSource);
+
+            //videoPlayer.Prepare();
+            ////Wait until video is prepared
+            //while (!videoPlayer.isPrepared)
+            //{
+            //    Debug.Log("Preparing Video");
+            //    yield return null;
+            //}
+            //Debug.Log("Done Preparing Video");
+
+            videoPlayer.Play();
+            //WorldSpaceVideo wsv = player.GetComponent<WorldSpaceVideo>();
+            //Array.Resize(ref wsv.videoClips, wsv.videoClips.Length + 1);
+            //VideoClip vc = new VideoClip();
+        }
+    }
 
     public void SetNextClip()
     {

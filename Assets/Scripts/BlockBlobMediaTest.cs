@@ -4,11 +4,11 @@ using UnityEngine.UI;
 // Button event handlers for Azure Blob Storage Client demo scene
 public class BlockBlobMediaTest : MonoBehaviour
 {
-    public InputField inputFilename;
+    public Dropdown inputFilename;
 
     public async void BlockBlobMediaUpload()
     {
-        string filename = inputFilename.text.Trim();
+        string filename = inputFilename.captionText.text.Trim();
         if (filename.Length == 0)
         {
             AzureBlobStorageClient.instance.WriteLine("Please specify the file you wish to transfer.");
@@ -21,7 +21,7 @@ public class BlockBlobMediaTest : MonoBehaviour
 
     public async void BlockBlobMediaDownload()
     {
-        string filename = inputFilename.text.Trim();
+        string filename = inputFilename.captionText.text.Trim();
         if (filename.Length == 0)
         {
             AzureBlobStorageClient.instance.WriteLine("Please specify the file you wish to transfer.");
@@ -34,7 +34,7 @@ public class BlockBlobMediaTest : MonoBehaviour
 
     public async void BlockBlobMediaDownloadBySegments()
     {
-        string filename = inputFilename.text.Trim();
+        string filename = inputFilename.captionText.text.Trim();
         if (filename.Length == 0)
         {
             AzureBlobStorageClient.instance.WriteLine("Please specify the file you wish to transfer.");

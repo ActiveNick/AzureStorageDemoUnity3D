@@ -53,8 +53,15 @@ public class AzureBlobStorageClient : MonoBehaviour
         // Allows this class instance to behave like a singleton
         instance = this;
 
-        _myText = GameObject.Find("DebugText").GetComponent<Text>();
-        IsDebugTextEnabled = (_myText != null);
+        GameObject dt = GameObject.Find("DebugText");
+        if (dt != null)
+        {
+            _myText = dt.GetComponent<Text>();
+            IsDebugTextEnabled = (_myText != null);
+        } else
+        {
+            IsDebugTextEnabled = false;
+        }      
 
         string connString;
         // Check to see if this is necessary for standalone desktop builds

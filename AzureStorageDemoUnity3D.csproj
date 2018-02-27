@@ -603,6 +603,7 @@
     <Compile Include="Assets\Scripts\BlobTransferDM.cs" />
     <Compile Include="Assets\Scripts\BlockBlobMediaTest.cs" />
     <Compile Include="Assets\Scripts\PlayHeadMover.cs" />
+    <Compile Include="Assets\Scripts\VideoFileManager.cs" />
     <Compile Include="Assets\Scripts\WorldSpaceVideo.cs" />
     <Compile Include="Assets\Storage\Scripts\AzureBlobStorageClient.cs" />
     <Compile Include="Assets\Storage\Scripts\BaseStorage.cs" />
