@@ -522,7 +522,6 @@
     <Compile Include="Assets\HoloToolkit\Utilities\Scripts\Utils.cs" />
     <Compile Include="Assets\HoloToolkit\Utilities\Scripts\VectorRollingStatistics.cs" />
     <Compile Include="Assets\HoloToolkit\Utilities\Scripts\WindowsApiChecker.cs" />
-    <Compile Include="Assets\HoloToolkit\Utilities\Scripts\WorldAnchorManager.cs" />
     <Compile Include="Assets\HoloToolkit\Utilities\Shaders\FastConfigurable\Scripts\CalibrationSpace.cs" />
     <Compile Include="Assets\HoloToolkit\UX\Scripts\AxisSlider.cs" />
     <Compile Include="Assets\HoloToolkit\UX\Scripts\Buttons\AnimatorControllerAction.cs" />
@@ -603,15 +602,12 @@
     <Compile Include="Assets\Scripts\BlobTransferDM.cs" />
     <Compile Include="Assets\Scripts\BlockBlobMediaTest.cs" />
     <Compile Include="Assets\Scripts\PlayHeadMover.cs" />
+    <Compile Include="Assets\Scripts\SceneNavigation.cs" />
     <Compile Include="Assets\Scripts\VideoFileManager.cs" />
     <Compile Include="Assets\Scripts\WorldSpaceVideo.cs" />
     <Compile Include="Assets\Storage\Scripts\AzureBlobStorageClient.cs" />
     <Compile Include="Assets\Storage\Scripts\BaseStorage.cs" />
-    <Compile Include="Assets\Storage\Scripts\BlobStorage.cs" />
     <Compile Include="Assets\Storage\Scripts\BlobStorageTextureDownloader.cs" />
-    <Compile Include="Assets\Storage\Scripts\FileStorage.cs" />
-    <Compile Include="Assets\Storage\Scripts\QueueStorage.cs" />
-    <Compile Include="Assets\Storage\Scripts\TableStorage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\HoloToolkit\Input\Shaders\Cursor.shader" />

@@ -378,6 +378,7 @@
     <Compile Include="Assets\HoloToolkit\UX\Scripts\Collections\Editor\CollectionEditor.cs" />
     <Compile Include="Assets\HoloToolkit\UX\Scripts\Editor\CompoundButtonSaveInterceptor.cs" />
     <Compile Include="Assets\HoloToolkit\UX\Scripts\Editor\KeyboardInputFieldEditor.cs" />
+    <Compile Include="Assets\Storage\Editor\AzureBlobStorageManagerEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\HoloToolkit\Input\Shaders\Cursor.shader" />
