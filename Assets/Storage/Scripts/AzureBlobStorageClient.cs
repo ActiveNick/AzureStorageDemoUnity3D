@@ -37,7 +37,7 @@ public class AzureBlobStorageClient : MonoBehaviour
     public string BlobContainerName = "mediacontainerblockblob";  // The blob container where we read from and write to
     [Tooltip("Segment size to use for segmented blob upload & download operations (in KB).")]
     public int SegmentSizeKB = 1024;
-    [Tooltip("Determines blob downloads will overwrite existing files by default (Can be overriden on each call in code).")]
+    [Tooltip("Determines if blob downloads will overwrite existing files by default. Can be overriden on each call in code.")]
     public bool OverwriteFilesByDefault = false;
 
     public Progress ProgressBar;

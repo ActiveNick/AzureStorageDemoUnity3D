@@ -157,7 +157,17 @@ Prefab:
         type: 2}
       propertyPath: FloorQuad
       value: 
-      objectReference: {fileID: 2120660002}
+      objectReference: {fileID: 1520281459093612, guid: 08d25ccfbbc595b4a820c7edd551d095,
+        type: 2}
+    - target: {fileID: 114129378875773704, guid: d29bc40b7f3df26479d6a0aac211c355,
+        type: 2}
+      propertyPath: renderFloor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586147040494190, guid: d29bc40b7f3df26479d6a0aac211c355, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d29bc40b7f3df26479d6a0aac211c355, type: 2}
   m_IsPrefabParent: 0
@@ -208,7 +218,7 @@ Prefab:
     - target: {fileID: 114010884549100502, guid: 30f5b91d271a2ae4cb276720435ce027,
         type: 2}
       propertyPath: OverwriteFilesByDefault
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30f5b91d271a2ae4cb276720435ce027, type: 2}
@@ -518,7 +528,7 @@ Prefab:
     - target: {fileID: 114870533315304924, guid: 3ff3fb094318a37468739ea3da35463e,
         type: 2}
       propertyPath: videoClips.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 328716469583613156, guid: 3ff3fb094318a37468739ea3da35463e,
         type: 2}
@@ -635,15 +645,13 @@ Prefab:
     - target: {fileID: 114870533315304924, guid: 3ff3fb094318a37468739ea3da35463e,
         type: 2}
       propertyPath: videoClips.Array.data[0]
-      value: 
-      objectReference: {fileID: 32900000, guid: 06d200e383631cb4382cf85d9b42f533,
-        type: 3}
+      value: SurfaceStudio.mp4
+      objectReference: {fileID: 0}
     - target: {fileID: 114870533315304924, guid: 3ff3fb094318a37468739ea3da35463e,
         type: 2}
       propertyPath: videoClips.Array.data[1]
-      value: 
-      objectReference: {fileID: 32900000, guid: f23fc2209bd81464c91769ec4c450664,
-        type: 3}
+      value: SurfaceBook.mp4
+      objectReference: {fileID: 0}
     - target: {fileID: 328716469583613156, guid: 3ff3fb094318a37468739ea3da35463e,
         type: 2}
       propertyPath: m_VideoClip
@@ -669,6 +677,21 @@ Prefab:
         type: 2}
       propertyPath: m_WaitForFirstFrame
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114870533315304924, guid: 3ff3fb094318a37468739ea3da35463e,
+        type: 2}
+      propertyPath: videoClips.Array.data[2]
+      value: SurfacePro4.mp4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114870533315304924, guid: 3ff3fb094318a37468739ea3da35463e,
+        type: 2}
+      propertyPath: videoClips.Array.data[3]
+      value: CortanaInvoke.mp4
+      objectReference: {fileID: 0}
+    - target: {fileID: 224003446980345566, guid: 3ff3fb094318a37468739ea3da35463e,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.05
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114485850504882792, guid: 3ff3fb094318a37468739ea3da35463e, type: 2}
@@ -935,8 +958,3 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1100210682}
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
---- !u!1 &2120660002 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1347375189326396, guid: 74c7587e0791e174e8e5ac1ce4b5e21b,
-    type: 2}
-  m_PrefabInternal: {fileID: 1604915060}
