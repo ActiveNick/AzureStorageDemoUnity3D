@@ -601,6 +601,7 @@
     <Compile Include="Assets\ProgressBar\Scripts\Progress.cs" />
     <Compile Include="Assets\Scripts\BlobTransferDM.cs" />
     <Compile Include="Assets\Scripts\BlockBlobMediaTest.cs" />
+    <Compile Include="Assets\Scripts\OutdoorTrigger.cs" />
     <Compile Include="Assets\Scripts\PlayHeadMover.cs" />
     <Compile Include="Assets\Scripts\SceneNavigation.cs" />
     <Compile Include="Assets\Scripts\SkyboxVideo.cs" />

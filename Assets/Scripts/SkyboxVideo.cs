@@ -9,10 +9,13 @@ public class SkyboxVideo : MonoBehaviour {
 
     // The video to load as a 360 video
     public string videoClip;
+    public GameObject Walls;
+    public GameObject Ceiling;
 
     // Used to control playback, we get these from the current gameobject
     private VideoPlayer videoPlayer;
     private AudioSource audioSource;
+    // Used to affect the appearance of the walls which will switch to transparent
 
     // Use this for initialization
     private void Awake () {
@@ -22,12 +25,19 @@ public class SkyboxVideo : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	async void Start () {
+	void Start () {
         // Need to release the video texture to clear the screen on start, 
         // otherwise the last played frame from the last session will stick around
-        videoPlayer.targetTexture.Release();
+        videoPlayer.targetTexture.Release();        
+    }
+
+    public async void SwitchToOutdoorTheater()
+    {
         // Set current video clip to the first one in the array, downloads it if needed
         await PrepareVideoFromFile(videoClip);
+
+        Walls.SetActive(false);
+        Ceiling.SetActive(false);
     }
 
     /// <summary>
