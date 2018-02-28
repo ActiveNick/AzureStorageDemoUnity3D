@@ -11,11 +11,15 @@ public class SkyboxVideo : MonoBehaviour {
     public string videoClip;
     public GameObject Walls;
     public GameObject Ceiling;
+    public float Velocity = 1;
 
     // Used to control playback, we get these from the current gameobject
     private VideoPlayer videoPlayer;
     private AudioSource audioSource;
-    // Used to affect the appearance of the walls which will switch to transparent
+    // Used while the walls are moving
+    private bool isWallMoving = false;
+    private float currentVelocity = 0.0f;
+    private static float t = 0.0f;
 
     // Use this for initialization
     private void Awake () {
@@ -31,13 +35,31 @@ public class SkyboxVideo : MonoBehaviour {
         videoPlayer.targetTexture.Release();        
     }
 
+    private void Update()
+    {
+        if (isWallMoving)
+        {
+            // We Lerp to get a gradual acceleration
+            currentVelocity = Mathf.Lerp(0, Velocity, t);
+            t = ( t > 1) ? 1.0f : (t + (Time.deltaTime * 0.25f));  // 0.25 means we reach max velocity in 4 seconds
+            Walls.transform.position += new Vector3(0, currentVelocity * Time.deltaTime, 0);
+            Ceiling.transform.position += new Vector3(0, currentVelocity * Time.deltaTime, 0);
+
+            if (Walls.transform.position.y > 50)
+            {
+                Walls.SetActive(false);
+                Ceiling.SetActive(false);
+                isWallMoving = false;
+            }
+        }
+    }
+
     public async void SwitchToOutdoorTheater()
     {
         // Set current video clip to the first one in the array, downloads it if needed
         await PrepareVideoFromFile(videoClip);
 
-        Walls.SetActive(false);
-        Ceiling.SetActive(false);
+        StartCoroutine(VideoPlayer_started());
     }
 
     /// <summary>
@@ -63,5 +85,12 @@ public class SkyboxVideo : MonoBehaviour {
 
             videoPlayer.Play();
         }
+    }
+
+    private IEnumerator VideoPlayer_started() // (VideoPlayer source)
+    {
+        // Give asecond for the video player to actually start before we raise the walls
+        yield return new WaitForSeconds(1);
+        isWallMoving = true;
     }
 }
