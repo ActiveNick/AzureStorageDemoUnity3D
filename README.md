@@ -1,5 +1,5 @@
 # AzureStorageDemoUnity3D
-Sample Unity project used to demonstrate the use of [Azure Storage](https://azure.microsoft.com/services/storage/) services in games and Mixed Reality projects. This app shows how you can upload/download blobs from Azure Storage using the basic Azure Storage SDK, and you also get the ability to download blobs by segments of 1MB (configurable) which opens the door for tracking progress during the download. This allows you to dynamically load large media files such as high-resolution textures, videos and even panoramic 360 degrees videos.
+Sample Unity project used to demonstrate the use of [Azure Storage](https://azure.microsoft.com/services/storage/) services in games and Mixed Reality projects. This app shows how you can upload/download blobs from Azure Storage using the basic Azure Storage SDK, and you also get the ability to download blobs by segments of 1MB (configurable) which opens the door for tracking progress during the download. This allows you to dynamically load large media files from the cloud at runtime, such as high-resolution textures, HD videos and even panoramic 360 degrees videos.
 
 * **Unity version: 2017.2.1p4** [download here](https://beta.unity3d.com/download/1992a1ed2d78/UnityDownloadAssistant-2017.2.1p4.exe?_ga=2.144542141.908717835.1519654169-26152681.1510325491)
 * **Mixed Reality Toolkit version: 2017.2.1.1** [download here](https://github.com/Microsoft/MixedRealityToolkit-Unity/releases/tag/2017.2.1.1)
@@ -7,6 +7,9 @@ Sample Unity project used to demonstrate the use of [Azure Storage](https://azur
 # Demo Scenes
 
 * **AzureBlobStorageTest**: Simple scene to demonstrate how to upload & download files to/from Azure Blob Storage, showcasing the Azure Transfer ProgressBar and the debug window. The spheres demonstrate the use of the *BlobStorageTextureDownloader* script.
+
+![Basic Blob Storage Demo Scene](Screenshots/BasicBlobStorageDemoScene01.PNG)
+
 * **AzureBlobStorageVideoTest**: Simple movie theater scene used to play video files downloaded from Azure Blob Storage. Press the Play button to start the first video clip, and use the Skip button to queue-up the next video clip. Selecting the soccer ball loads a 360 degrees panoramic video from Azure Storage and uses it as a skybox, lifting the theater walls to reveal the outdoors. Sample videos are provided in the *StreamingAssets* folder, and you can use the *AzureBlobStorageTest* scene to upload your videos to blob storage before using them in this scene.
 
 ![Movie Theater Demo Scene](Screenshots/MovieTheaterSceneView01.PNG)
@@ -24,7 +27,7 @@ Sample Unity project used to demonstrate the use of [Azure Storage](https://azur
 
 ## Known Issues
 
-* While this project includes two scenes with a transition button allowing the user to navigate from the first to the second scene, there are issues with the transition still being worked out (see below). It is therefore recommended to treat both scenes as individual scenes rather than part fo a whole (for now).
+* While this project includes two scenes with a transition button allowing the user to navigate from the first to the second scene, there are issues with the transition still being worked out (see below). It is therefore recommended to treat both scenes as individual scenes rather than part of a whole (for now).
 * *The scene transition is messed-up in UWP*. In the Unity editor, the scene transition works fine. In a UWP build, the scene isn't rendered properly and the whole world is purple, with the cursor still visible in the empty world.
 * *The controllers don’t transition well*. During a scene transition the camera position resets properly, but the controllers do not. They remain at the last known location in the previous scene.
 
