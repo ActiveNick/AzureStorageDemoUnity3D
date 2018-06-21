@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2017
+# Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureStorageDemoUnity3D", "AzureStorageDemoUnity3D.csproj", "{D2ACBF48-C431-DD7A-DE89-407D36250555}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureStorageDemoUnity3D.Editor", "AzureStorageDemoUnity3D.Editor.csproj", "{4E7518F0-FC84-3EBE-5E4D-954572024CA1}"

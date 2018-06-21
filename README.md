@@ -1,8 +1,8 @@
 # AzureStorageDemoUnity3D
 Sample Unity project used to demonstrate the use of [Azure Storage](https://azure.microsoft.com/services/storage/) services in games and Mixed Reality projects. This app shows how you can upload/download blobs from Azure Storage using the basic Azure Storage SDK, and you also get the ability to download blobs by segments of 1MB (configurable) which opens the door for tracking progress during the download. This allows you to dynamically load large media files from the cloud at runtime, such as high-resolution textures, HD videos and even panoramic 360 degrees videos.
 
-* **Unity version: 2017.2.1p4** [download here](https://beta.unity3d.com/download/1992a1ed2d78/UnityDownloadAssistant-2017.2.1p4.exe?_ga=2.144542141.908717835.1519654169-26152681.1510325491)
-* **Mixed Reality Toolkit version: 2017.2.1.1** [download here](https://github.com/Microsoft/MixedRealityToolkit-Unity/releases/tag/2017.2.1.1)
+* **Unity version: 2017.4.5f1**
+* **Mixed Reality Toolkit version: 2017.2.1.1**
 
 # Demo Scenes
 
